@@ -18,7 +18,7 @@ export default function MovieItem({ info }) {
 
                 Nota: {info.vote_average} /
                  {''}  {info.vote_count}
-                <a href={info.homepage}>{info.homepage}</a>
+                {/* <a href={info.homepage}>{info.homepage}</a> */}
 
                 <p>{info.overview}</p>
 
@@ -41,17 +41,20 @@ export default function MovieItem({ info }) {
 // SERVER-SIDE
 
 export async function getServerSideProps(context) {
+    
     const { id } = context.params
+   
     // acessando uma rota api interna:
-    const res = await fetch(`http://localhost:3000/api/movie/${id}`)
+    const result = await fetch(`http://localhost:3000/api/movie/${id}`)
     // transformar em json
-    const json = await res.json();
+    const jsonres = await result.json();
 
     // console.log('JSON', json)
 
     return {
         props: {
-            info: json.info
+            info: jsonres.info
         }
     }
+
 }

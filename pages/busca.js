@@ -9,51 +9,56 @@ export default function Home() {
 
     const handleSearch = async () => {
         // aqui é a junção de busca com api/search
-        if (searchText !== '') {
-            console.log('cheguei aqui com ', searchText)
-            // fazendo a busca incluindo a variável 'q' como sendo um parametro
-            const result = await fetch(`http://localhost:3000/api/search?q=${searchText}`);
-            const json = await result.json();
+        
+            if (searchText !== '') {
+                console.log('cheguei aqui com ', searchText)
+                // fazendo a busca incluindo a variável 'q' como sendo um parametro
+                const result = await fetch(`http://localhost:3000/api/search?q=${searchText}`);
+                const jsonres = await result.json();
 
-            //console.log(json); // só mostra no browser (front end exclusivo)
-            // agora será salvo em um state (movieList)
-            setMovieList(json.list);
-            // proximo passo, esxibir o resultado abaixo do botão enviar
-        }
+                //console.log(json); // só mostra no browser (front end exclusivo)
+                // agora será salvo em um state (movieList)
+                setMovieList(jsonres.list);
+                // proximo passo, esxibir o resultado abaixo do botão enviar
+            }
 
-    }
-    return (
-        <div className={styles.container}>
-            <Head>
-                <title>Cinemax</title>
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
 
-            <main className={styles.main}>
-                <h1 className={styles.title}>Busca</h1>
+            return (
+                <div className={styles.container}>
+                    <Head>
+                        <title>Cinemax</title>
+                        <link rel="icon" href="/favicon.ico" />
+                    </Head>
 
-                <input type="text" value={searchText} onChange={e => setSearchText(e.target.value)} />
-                <br />
-                <button onClick={handleSearch}>Buscar</button><br />
-                <a href='/'>Home</a>
+                    <main className={styles.main}>
+                        <h1 className={styles.title}>Busca</h1>
 
-                <hr />
+                        <input type="text" value={searchText} onChange={e => setSearchText(e.target.value)} />
+                        <br />
+                        <button onClick={handleSearch}>Buscar</button><br />
+                        <a href='/'>Home</a>
 
-                <ul>
-                    {movieList.map(item => (
-                        <li key={item.id}>
-                            <a href={`/movie/${item.id}`}>
-                                    <img src={`https://image.tmdb.org/t/p/original${item.poster_path}`} width="150" /><br />
-                                    {item.title}<br/>
+                        <hr />
+
+                        <ul>
+                            {movieList.map(item => (
+                                <li key={item.id}>
+                                    <a href={`/movie/${item.id}`}>
+                                        <img src={`https://image.tmdb.org/t/p/original${item.poster_path}`} width="150" /><br />
+                                        {item.title}<br />
                                     Nota: {item.vote_average} /
                                     {''}  {item.vote_count}
-                                </a>
-                        </li>
-                    ))}
-                </ul>
-            </main>
-        </div>
-    )
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </main>
+                </div>
+            )
+       
+    }
+
+
 }
 
 // CRIAR PAGINA CLIENT-SIDE-RENDER

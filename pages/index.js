@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link';
+
 import styles from '../styles/Home.module.css'
 
 export default function Home({ list }) {
@@ -47,13 +48,16 @@ export default function Home({ list }) {
 // ao chamar esta pagina http:lcoalhost:3000 ela chama a api abaixo e retorna na props que é aprensentado no componente Home acima.
 export async function getServerSideProps() {
   // acessando uma rota api interna:
-  const res = await fetch('http://localhost:3000/api/trending')
+  
+  const result = await fetch('http://localhost:3000/api/trending')
   // transformar em json
-  const json = await res.json();
+  const jsonres = await result.json()
+  
   return {
     props: {
-      list: json.list
+      list: jsonres.list
     }
   }
+
 }
 

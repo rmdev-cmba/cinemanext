@@ -11,14 +11,14 @@ export default async (req, res) => {
 
 
     //modelo busca do filme: 
-    const response = await fetch(`${BASE_URL}/movie/${id}?api_key=${KEY_API}&language=pt-BR`)
+    const result = await fetch(`${BASE_URL}/movie/${id}?api_key=${KEY_API}&language=pt-BR`)
 
-    const json = await response.json();
+    const jsonres = await result.json();
 
     //console.log(json.results) // este console opera em back end
 
     res.status(200).json({
-        info: json
+        info: jsonres
     });
 
 }
