@@ -12,27 +12,12 @@ export default function Home({ list }) {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Filmes em Destaque
+          Sobre o Sistema
         </h1>
-
+        O sistema foi feito em live para demonstrar os primeiros passos em next.js.
         {/* criando um link de busca pelo id */}
         <Link href="/busca">Ir para a Busca</Link>
-        <ul>
-          {/* extraindo as imagens dos filmes e direccionando um link aos id's */}
-          {list.map(item => (
-            <li>
-              <a href={`/movie/${item.id}`}>
-                <>
-                  <img src={`https://image.tmdb.org/t/p/original${item.poster_path}`} width="150" /><br />
-                  {item.title}<br/>
-                  Nota: {item.vote_average} /
-                  {''}  {item.vote_count}
-                </>
-              </a>
-            </li>
-          ))}
-        </ul>
-        <Link href='/sobre'>Sobre</Link>
+        
       </main>
     </div>
   )

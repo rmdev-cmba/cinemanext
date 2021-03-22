@@ -14,6 +14,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
 }
 
 .footer {
@@ -119,4 +120,14 @@
     width: 100%;
     flex-direction: column;
   }
+}
+
+.main ul {
+  list-style: none;
+  margin: 0;
+}
+
+.main li {
+  display: inline-block;
+  margin: 20px;
 }
