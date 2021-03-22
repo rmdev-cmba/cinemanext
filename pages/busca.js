@@ -41,7 +41,7 @@ export default function Home() {
 
                 <ul>
                     {movieList.map(item => (
-                        <li>
+                        <li key={item.id}>
                             <a href={`/movie/${item.id}`}>
                                     <img src={`https://image.tmdb.org/t/p/original${item.poster_path}`} width="150" /><br />
                                     {item.title}<br/>

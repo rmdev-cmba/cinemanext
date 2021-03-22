@@ -20,7 +20,7 @@ export default function Home({ list }) {
         <ul>
           {/* extraindo as imagens dos filmes e direccionando um link aos id's */}
           {list.map(item => (
-            <li>
+            <li key={item.id}>
               <a href={`/movie/${item.id}`}>
                 <>
                   <img src={`https://image.tmdb.org/t/p/original${item.poster_path}`} width="150" /><br />
