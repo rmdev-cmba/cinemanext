@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import Link from 'next/link';
+
 import styles from '../styles/Home.module.css'
 
-export default function Home({ list }) {
+export default function HomePage({ list }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -12,12 +13,27 @@ export default function Home({ list }) {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Sobre o Sistema
+          Filmes em Destaque
         </h1>
-        O sistema foi feito em live para demonstrar os primeiros passos em next.js.
+
         {/* criando um link de busca pelo id */}
         <Link href="/busca">Ir para a Busca</Link>
-        
+        <ul>
+          {/* extraindo as imagens dos filmes e direccionando um link aos id's */}
+          {list.map(item => (
+            <li key={item.id}>
+              <a href={`/movie/${item.id}`}>
+                <>
+                  <img src={`https://image.tmdb.org/t/p/original${item.poster_path}`} width="150" /><br />
+                  {item.title}<br/>
+                  Nota: {item.vote_average} /
+                  {''}  {item.vote_count}
+                </>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <Link href='/sobre'>Sobre</Link>
       </main>
     </div>
   )
@@ -32,12 +48,16 @@ export default function Home({ list }) {
 // ao chamar esta pagina http:lcoalhost:3000 ela chama a api abaixo e retorna na props que é aprensentado no componente Home acima.
 export async function getServerSideProps() {
   // acessando uma rota api interna:
-  const res = await fetch('http://localhost:3000/api/trending')
+  
+  const result = await fetch('http://localhost:3000/api/trending')
   // transformar em json
-  const json = await res.json();
+  const jsonres = await result.json()
+  
   return {
     props: {
-      list: json.list
+      list: jsonres.list
     }
   }
+
 }
+

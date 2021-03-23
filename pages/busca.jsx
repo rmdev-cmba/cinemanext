@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styles from '../styles/Home.module.css'
 
 
-export default function Home() {
+export default function BuscaPage() {
     const [searchText, setSearchText] = useState('');
     const [movieList, setMovieList] = useState([]);
 
@@ -11,7 +11,7 @@ export default function Home() {
         // aqui é a junção de busca com api/search
         
             if (searchText !== '') {
-                console.log('cheguei aqui com ', searchText)
+                //console.log('cheguei aqui com ', searchText)
                 // fazendo a busca incluindo a variável 'q' como sendo um parametro
                 const result = await fetch(`http://localhost:3000/api/search?q=${searchText}`);
                 const jsonres = await result.json();
@@ -22,7 +22,7 @@ export default function Home() {
                 // proximo passo, esxibir o resultado abaixo do botão enviar
             }
 
-
+        }
             return (
                 <div className={styles.container}>
                     <Head>
@@ -59,7 +59,7 @@ export default function Home() {
     }
 
 
-}
+
 
 // CRIAR PAGINA CLIENT-SIDE-RENDER
 // Não precisa de getServer...
