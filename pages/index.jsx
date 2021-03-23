@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import Link from 'next/link';
-
 import styles from '../styles/Home.module.css'
+
+//const LOCAL = process.env
 
 export default function HomePage({ list }) {
   return (
@@ -25,7 +26,7 @@ export default function HomePage({ list }) {
               <a href={`/movie/${item.id}`}>
                 <>
                   <img src={`https://image.tmdb.org/t/p/original${item.poster_path}`} width="150" /><br />
-                  {item.title}<br/>
+                  {item.title}<br />
                   Nota: {item.vote_average} /
                   {''}  {item.vote_count}
                 </>
@@ -48,15 +49,18 @@ export default function HomePage({ list }) {
 // ao chamar esta pagina http:lcoalhost:3000 ela chama a api abaixo e retorna na props que é aprensentado no componente Home acima.
 export async function getServerSideProps() {
   // acessando uma rota api interna:
-  
-  const result = await fetch('http://localhost:3000/api/trending')
-  // transformar em json
-  const jsonres = await result.json()
-  
-  return {
-    props: {
-      list: jsonres.list
+  try {
+    const result = await fetch('https://cinema-seven.vercel.app/api/trending')
+    // transformar em json
+    const jsonres = await result.json()
+
+    return {
+      props: {
+        list: jsonres.list
+      }
     }
+  } catch (err) {
+    console.error(err);
   }
 
 }

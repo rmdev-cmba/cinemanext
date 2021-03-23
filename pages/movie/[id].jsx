@@ -41,20 +41,23 @@ export default function MovieItem({ info }) {
 // SERVER-SIDE
 
 export async function getServerSideProps(context) {
-    
+
     const { id } = context.params
-   
-    // acessando uma rota api interna:
-    const result = await fetch(`http://localhost:3000/api/movie/${id}`)
-    // transformar em json
-    const jsonres = await result.json();
+    try {
+        // acessando uma rota api interna:
+        const result = await fetch(`https://cinema-seven.vercel.app/api/movie/${id}`)
+        // transformar em json
+        const jsonres = await result.json();
 
-    // console.log('JSON', json)
+        // console.log('JSON', json)
 
-    return {
-        props: {
-            info: jsonres.info
+        return {
+            props: {
+                info: jsonres.info
+            }
         }
+    } catch (err) {
+        console.error(err);
     }
 
 }
