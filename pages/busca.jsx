@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { useState } from 'react';
 import styles from '../styles/Home.module.css'
 
-const LOCAL_URL = process.env
+//const LOCAL_URL = process.env
 
 export default function BuscaPage() {
     const [searchText, setSearchText] = useState('');
